@@ -1,18 +1,26 @@
 import { Avatar, Menu, MenuButton, MenuItem, MenuList, Wrap, WrapItem } from "@chakra-ui/react";
 import { NavLink } from "react-router-dom";
 import { AiOutlineMenu } from "react-icons/ai";
+import { useContext } from "react";
+import { authContext } from "../../AuthProvider/AuthProvider";
 
 const NavBar = () => {
 
+    const {user, Logout} = useContext(authContext)
+    const handleLogout = () =>{
+        Logout()
+    }
     const NavLinks = <div className="flex flex-col md:flex-row gap-4 gap-y-2">
         <NavLink className='hover:bg-sky-400 rounded-md hover:text-white p-2'>HOME</NavLink>
         <NavLink className='hover:bg-sky-400 rounded-md hover:text-white p-2'>ADD BLOG</NavLink>
         <NavLink className='hover:bg-sky-400 rounded-md hover:text-white p-2'>ALL BLOGS</NavLink>
         <NavLink className='hover:bg-sky-400 rounded-md hover:text-white p-2'>FEATURED BLOG</NavLink>
         <NavLink className='hover:bg-sky-400 rounded-md hover:text-white p-2'>WISHLIST</NavLink>
+        { user ? <NavLink className='hover:bg-sky-400 rounded-md hover:text-white p-2' onClick={handleLogout}>LOGOUT</NavLink>:
         <NavLink className='hover:bg-sky-400 rounded-md hover:text-white p-2' to='/login'>LOGIN</NavLink>
-        <NavLink className='hover:bg-sky-400 rounded-md hover:text-white p-2'>LOGOUT</NavLink>
+        }
     </div>
+    
     return (
         <div className="bg-sky-100 rounded-md w-11/12 mx-auto p-2  md:py-4">
             <div className="flex items-center lg:px-4">
@@ -26,19 +34,19 @@ const NavBar = () => {
                         <li>{NavLinks}</li>
                     </ul>
                 </div>
-                <div className="lg:ml-6 md:ml-16 flex items-center">
-                        <h1 className="mr-6 ml-6 text-xl">Rakibul Hasan</h1>
+                {user && <div className="lg:ml-6 md:ml-16 flex items-center">
+                        <h1 className="mr-6 ml-6 text-xl">{user&& user.displayName}</h1>
                     <Wrap className="">
                         <WrapItem>
                             <Avatar
                                 size='lg'
                                 name='Prosper Otemuyiwa'
-                                src='https://bit.ly/prosper-baba'
+                                src={user&& user.photoURL}
                             />{' '}
                         </WrapItem>
                         
                     </Wrap>
-                </div>
+                </div>}
             </div>
             <div className="lg:hidden">
                 <Menu>

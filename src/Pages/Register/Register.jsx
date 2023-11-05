@@ -3,7 +3,7 @@ import { updateProfile } from "firebase/auth";
 import { authContext } from "../../AuthProvider/AuthProvider";
 import Swal from 'sweetalert2'
 import { useContext, useState } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Alert, AlertIcon, Stack } from "@chakra-ui/react";
 
 
@@ -13,9 +13,6 @@ const Register = () => {
     const [error, setError] = useState('')
     const naviget = useNavigate()
 
-    const HandleLogout = () =>{
-        Logout()
-    }
 
 
     const handleRegister = event => {

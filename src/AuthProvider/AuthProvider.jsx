@@ -1,6 +1,5 @@
-import { useConst } from "@chakra-ui/react";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
-import { createContext, useContext, useState } from "react";
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { createContext, useEffect, useState } from "react";
 import auth from "../firebase.config";
 
 
@@ -25,7 +24,13 @@ const AuthProvider = ( {children} ) => {
         return signOut(auth)
     }
 
-    
+    useEffect(() =>{
+        const unSubscribe = onAuthStateChanged(auth, currentUser =>{
+            setUser(currentUser)
+            setLoading(false)
+        })
+        return ()=> unSubscribe
+    },[])
 
     const authInfo = {
         user, 
