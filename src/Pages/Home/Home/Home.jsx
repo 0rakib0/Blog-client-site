@@ -1,12 +1,13 @@
-import { useContext } from "react";
-import { authContext } from "../../../AuthProvider/AuthProvider";
+import Banner from "./Banner/Banner";
 
 
 const Home = () => {
-    const {name} = useContext(authContext)
     return (
-        <div>
-            <h1>Name Is: {name}</h1>
+        <div className="w-11/12 mx-auto">
+            {/* banner section */}
+            <div className="my-6">
+                <Banner></Banner>
+            </div>
         </div>
     );
 };
