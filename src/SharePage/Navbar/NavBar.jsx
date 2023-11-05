@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import { AiOutlineMenu } from "react-icons/ai";
 import { useContext } from "react";
 import { authContext } from "../../AuthProvider/AuthProvider";
+import './ActiveLink.css'
 
 const NavBar = () => {
 
@@ -11,12 +12,12 @@ const NavBar = () => {
         Logout()
     }
     const NavLinks = <div className="flex flex-col md:flex-row gap-4 gap-y-2">
-        <NavLink className='hover:bg-sky-400 rounded-md hover:text-white p-2'>HOME</NavLink>
-        <NavLink className='hover:bg-sky-400 rounded-md hover:text-white p-2'>ADD BLOG</NavLink>
-        <NavLink className='hover:bg-sky-400 rounded-md hover:text-white p-2'>ALL BLOGS</NavLink>
-        <NavLink className='hover:bg-sky-400 rounded-md hover:text-white p-2'>FEATURED BLOG</NavLink>
-        <NavLink className='hover:bg-sky-400 rounded-md hover:text-white p-2'>WISHLIST</NavLink>
-        { user ? <NavLink className='hover:bg-sky-400 rounded-md hover:text-white p-2' onClick={handleLogout}>LOGOUT</NavLink>:
+        <NavLink to='/' className='hover:bg-sky-400 rounded-md hover:text-white p-2'>HOME</NavLink>
+        <NavLink to='/add-blog' className='hover:bg-sky-400 rounded-md hover:text-white p-2'>ADD BLOG</NavLink>
+        <NavLink to='/all-blog' className='hover:bg-sky-400 rounded-md hover:text-white p-2'>ALL BLOGS</NavLink>
+        <NavLink to='/featured-blog' className='hover:bg-sky-400 rounded-md hover:text-white p-2'>FEATURED BLOG</NavLink>
+        <NavLink to='/with-list' className='hover:bg-sky-400 rounded-md hover:text-white p-2'>WISHLIST</NavLink>
+        { user ? <button className='hover:bg-sky-400 rounded-md hover:text-white p-2' onClick={handleLogout}>LOGOUT</button>:
         <NavLink className='hover:bg-sky-400 rounded-md hover:text-white p-2' to='/login'>LOGIN</NavLink>
         }
     </div>
