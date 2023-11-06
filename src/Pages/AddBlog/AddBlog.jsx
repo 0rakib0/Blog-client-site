@@ -7,17 +7,14 @@ const AddBlog = () => {
 
     const [category, setCategory] = useState([])
     const CurrentTime = new Date()
-
-    console.log(CurrentTime)
-
-    useEffect(() =>{
+    useEffect(() => {
         fetch('http://localhost:5000/category')
-        .then(res => res.json())
-        .then(data =>setCategory(data))
-    },[])
+            .then(res => res.json())
+            .then(data => setCategory(data))
+    }, [])
 
 
-    const handleAddBlog = (event) =>{
+    const handleAddBlog = (event) => {
         event.preventDefault()
         const form = event.target;
         const title = form.title.value;
@@ -25,33 +22,48 @@ const AddBlog = () => {
         const Category = form.Category.value;
         const shorDes = form.shorDes.value;
         const details = form.details.value;
-        
+
+
+        console.log('Hello')
+        console.log(title.length)
+        console.log(shorDes.length)
+
+        if (shorDes.length > 120) {
+            Swal.fire(
+                'Short Description lenght must be less then 200',
+                'Somethink went wrong please submit valid number!',
+                'error'
+            )
+            return
+        }
+
+
         const Blog = {
             title,
             blogPpic,
             Category,
-            shorDes, 
+            shorDes,
             details,
             CurrentTime
         }
 
         console.log(Blog)
         axios.post('http://localhost:5000/add-blog', Blog)
-        .then(response => {
-            // Handle the success response here
-            if(response.data.insertedId){
-                Swal.fire(
-                    'Blog Successfully Post',
-                    'Your Blog Successfully post!',
-                    'success'
-                  )
-            }
-            form.reset()
-          })
-          .catch(error => {
-            // Handle any errors here
-            console.error(error);
-          });
+            .then(response => {
+                // Handle the success response here
+                if (response.data.insertedId) {
+                    Swal.fire(
+                        'Blog Successfully Post',
+                        'Your Blog Successfully post!',
+                        'success'
+                    )
+                }
+                form.reset()
+            })
+            .catch(error => {
+                // Handle any errors here
+                console.error(error);
+            });
 
     }
 
@@ -76,10 +88,10 @@ const AddBlog = () => {
                         <select name="Category" className="border-2 border-sky-100 p-2 h-12 rounded-lg mt-4 w-full md:w-1/2" id="">
                             <option value="comming">Select Category</option>
                             {
-                                category.map(cat =><option key={cat._id} value={cat.name}>{cat.name}</option>)
+                                category.slice(0, 3).map(cat => <option key={cat._id} value={cat.name}>{cat.name}</option>)
                             }
                         </select>
-                        <input type="text" placeholder="Blog short description" className="border-2 border-sky-100 p-2 h-12 rounded-lg mt-4 w-full  md:w-1/2" name="shorDes" required />
+                        <input type="text" placeholder="Blog short description (Short Description must be in 120 charecter)" className="border-2 border-sky-100 p-2 h-12 rounded-lg mt-4 w-full md:w-1/2" name="shorDes" required />
                     </div>
                     <div className="flex flex-col">
                         <label htmlFor="name" className="mt-2 mb-1">Blog Details Content</label>
