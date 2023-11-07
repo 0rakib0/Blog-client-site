@@ -3,7 +3,7 @@ import { useLoaderData } from "react-router-dom";
 import { authContext } from "../../AuthProvider/AuthProvider";
 import axios from "axios";
 import Swal from 'sweetalert2'
-import { Avatar, Wrap, WrapItem } from "@chakra-ui/react";
+import { Alert, AlertIcon, AlertTitle, Avatar, Wrap, WrapItem } from "@chakra-ui/react";
 
 const BlogDetails = () => {
     const Blog = useLoaderData()
@@ -43,12 +43,17 @@ const BlogDetails = () => {
             <div className="col-span-2 ">
                 <img src={Blog.blogPpic} className="w-full" alt="" />
 
-                <form className="my-2" onSubmit={handleComent}>
-                    <label htmlFor="comment" className="text-xl font-bold">Comment Here</label><br />
-                    <textarea name="comment" id="" cols="70" className="border-2 border-sky-400 rounded-lg p-2" rows="5"></textarea><br />
-                    <button className="bg-sky-400 text-white p-2 rounded-lg mb-6">Submit Comment</button>
-                </form>
-                <h1>Total Comment: {comments.length}</h1>
+                {user.email == Blog.email ? <Alert status='error' className="my-6">
+                    <AlertIcon />
+                    <AlertTitle>You are not comment your own blog</AlertTitle>
+                </Alert> :
+                    <form className="my-2" onSubmit={handleComent}>
+                        <label htmlFor="comment" className="text-xl font-bold">Comment Here</label><br />
+                        <textarea name="comment" id="" cols="70" className="border-2 border-sky-400 rounded-lg p-2" rows="5"></textarea><br />
+                        <button className="bg-sky-400 text-white p-2 rounded-lg mb-6">Submit Comment</button>
+                    </form>
+                }
+                <h1 className="text-xl font-semibold">Total Comment: {comments.length}</h1>
                 {
                     comments.map(comment => <div key={comment._id} className="w-3/4">
                         <div className="flex my-2 space-x-4 bg-sky-100 p-4 rounded-lg">
@@ -69,7 +74,10 @@ const BlogDetails = () => {
                 <h1 className="text-2xl font-bold mb-4">{Blog.title}</h1>
                 <h1>Total Comment: {comments.length}</h1>
                 <p>{Blog.CurrentTime}</p>
-                <button className="bg-sky-400 py-2 px-6 my-2  rounded-r-lg text-white">{Blog.Category}</button>
+                <button className="bg-sky-400 py-2 px-6 my-2 mr-4 rounded-lg text-white">{Blog.Category}</button>
+                {user.email == Blog.email && <button className="bg-sky-400 py-2 px-6 my-2  rounded-lg text-white">Update</button>
+                }
+
                 <p>{Blog.shorDes}</p>
                 <h3 className="text-2xl font-bold mt-6">Blog Description</h3>
                 <p className="mt-2">{Blog.details}</p>

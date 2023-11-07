@@ -48,6 +48,7 @@ const AddBlog = () => {
             details,
             CurrentTime,
             userName: user?.displayName,
+            email: user?.email,
             userPic: user?.photoURL
         }
 

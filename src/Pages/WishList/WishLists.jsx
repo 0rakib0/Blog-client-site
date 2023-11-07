@@ -43,7 +43,7 @@ const WishLists = () => {
     }
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/wishlists/${user.email}`)
+        axios.get(`http://localhost:5000/wishlists/${user.email}`, {withCredentials: true})
             .then(res => setWishList(res.data))
     }, [])
     return (
