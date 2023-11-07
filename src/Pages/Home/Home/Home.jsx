@@ -4,7 +4,7 @@ import { AiOutlineApartment } from "react-icons/ai";
 import RecentBlog from "./RecentBlog";
 import { useEffect, useState } from "react";
 import { AiFillFacebook, AiOutlineWhatsApp, AiOutlineInstagram, AiOutlineYoutube } from "react-icons/ai";
-import { Avatar, Wrap, WrapItem } from "@chakra-ui/react";
+import { Avatar, Input, InputGroup, InputLeftAddon, InputRightAddon, Stack, Wrap, WrapItem } from "@chakra-ui/react";
 
 const Home = () => {
     const [recentBlog, setRecentBlog] = useState([])
@@ -32,10 +32,7 @@ const Home = () => {
                     {
                         recentBlog.map(blog => <RecentBlog key={blog._id} blog={blog}></RecentBlog>)
                     }
-                    <div className="">
-                        <h4>Subscirve TO Our News Latter</h4>
-                        <p></p>
-                    </div>
+
                 </div>
                 <div className="col-span-2 ml-6 mt-0">
                     <h1 className="ml-12 text-2xl  font-semibold mb-6">Popular Post</h1>
@@ -72,13 +69,19 @@ const Home = () => {
                                     <Avatar name='Dan Abrahmov' src='https://bit.ly/dan-abramov' />
                                 </WrapItem>
                             </Wrap>
-                            <div>
+                            <div className="">
                                 <h4 className="text-xl font-semibold">Rakibul Hasan</h4>
                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad itaque ea cupiditate numquam illum, sapiente explicabo! Vitae beatae quis quasi?</p>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div className="bg-sky-100 w-11/12 text-center mx-auto py-6 rounded-lg mb-12">
+                <h4 className="text-4xl font-bold my-2">Subscirve To Our News Latter</h4>
+                <p className="mb-4">subscribe our Pachange and get a valuable discount</p>
+                <input type="email" placeholder="Enter Email" className="border-2 w-3/5 border-sky-400 p-2 h-12 rounded-l-lg z-10 " name="email" required />
+                 <button className="bg-sky-400 h-12 px-4 rounded-r-lg text-white">Subscribe</button>
             </div>
         </div>
     );

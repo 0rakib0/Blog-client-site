@@ -7,6 +7,7 @@ const RootPage = () => {
         <div>
             <NavBar></NavBar>
             <Outlet></Outlet>
+            
         </div>
     );
 };
