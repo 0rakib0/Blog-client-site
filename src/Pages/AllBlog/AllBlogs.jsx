@@ -1,45 +1,65 @@
-import Categor from "../Category/Categor";
-import Banner from "./Banner/Banner";
-import { AiOutlineApartment } from "react-icons/ai";
-import RecentBlog from "./RecentBlog";
+import axios from "axios";
 import { useEffect, useState } from "react";
-import { AiFillFacebook, AiOutlineWhatsApp, AiOutlineInstagram, AiOutlineYoutube } from "react-icons/ai";
+import RecentBlog from "../Home/Home/RecentBlog";
+import Category2 from "../Home/Category/Category2";
 import { Avatar, Wrap, WrapItem } from "@chakra-ui/react";
-import Category2 from "../Category/Category2";
+import { AiFillFacebook, AiOutlineApartment, AiOutlineInstagram, AiOutlineSearch, AiOutlineWhatsApp, AiOutlineYoutube } from "react-icons/ai";
 
-const Home = () => {
-    const [recentBlog, setRecentBlog] = useState([])
+const AllBlogs = () => {
+    const [blogs, setBlogs] = useState([])
     const [Categorys, setCategorys] = useState([])
 
+    const [selectCategory, setCelectCategory] = useState([])
+    const [selectTitle, setSelectTitle] = useState([])
+
+    const handleCategory = e => {
+        // console.log(e.target.value)
+        setCelectCategory(e.target.value)
+    }
+
+    const handleTitle = e =>{
+        e.preventDefault()
+        const titleVal = e.target.serch.value
+        setSelectTitle(titleVal)
+    }
+
     useEffect(() => {
-        fetch('http://localhost:5000/recent-blog')
+        fetch('http://localhost:5000/categorys')
             .then(res => res.json())
-            .then(data => setRecentBlog(data))
+            .then(data => setCategorys(data))
     }, [])
 
-    useEffect(() =>{
-        fetch('http://localhost:5000/categorys')
-        .then(res => res.json())
-        .then(data => setCategorys(data))
-    },[])
+    useEffect(() => {
+        axios.get(`http://localhost:5000/all-blog?category=${selectCategory}&title=${selectTitle}`)
+            .then(data => setBlogs(data.data))
 
+        // fetch('http://localhost:5000/all-blog')
+        // .then(res => res.json())
+        // .then(data => setBlogs(data))
+    }, [selectCategory, selectTitle])
     return (
         <div className="w-11/12 mx-auto">
-            {/* banner section */}
-            <div className="my-6">
-                <Banner></Banner>
+            <div className="m-4 lg:flex justify-between">
+                <div className="mb-2">
+                    <form onSubmit={handleTitle}>
+                        <input type="text" className="h-12 border-2 border-sky-400 lg:w-[500px] rounded-l-lg p-2" placeholder="Serch" name="serch" />
+                        <button className="h-12 bg-sky-400 px-6 rounded-r-lg text-white"><AiOutlineSearch></AiOutlineSearch></button>
+                    </form>
+                </div>
+                <div>
+                    <select name="" id="" onChange={handleCategory} className="h-12 border-2 border-sky-400 rounded-lg p-2 w-full">
+                        <option value="" selected>Select Category</option>
+                        {
+                            Categorys.map(cat => <option key={cat._id} value={cat.name}>{cat.name}</option>)
+                        }
+                    </select>
+                </div>
             </div>
-            {/* Category Section */}
-            <div>
-                <Categor></Categor>
-            </div>
-            {/* Main section0 */}
-            <h1 className="text-2xl font-bold my-4">Read Recent Blog</h1>
             <div className="grid lg:grid-cols-5 items-start">
                 <div className="col-span-3">
 
                     {
-                        recentBlog.map(blog => <RecentBlog key={blog._id} blog={blog}></RecentBlog>)
+                        blogs.map(blog => <RecentBlog key={blog._id} blog={blog}></RecentBlog>)
                     }
 
                 </div>
@@ -92,14 +112,8 @@ const Home = () => {
                     </div>
                 </div>
             </div>
-            <div className="bg-sky-100 text-center mx-auto py-6 rounded-lg pb-12">
-                <h4 className="text-4xl font-bold my-2">Subscirve To Our News Latter</h4>
-                <p className="mb-4">subscribe our Pachange and get a valuable discount</p>
-                <input type="email" placeholder="Enter Email" className="border-2 w-3/5 border-sky-400 p-2 h-12 rounded-l-lg z-10 " name="email" required />
-                 <button className="bg-sky-400 h-12 px-4 rounded-r-lg text-white">Subscribe</button>
-            </div>
         </div>
     );
 };
 
-export default Home;
+export default AllBlogs;

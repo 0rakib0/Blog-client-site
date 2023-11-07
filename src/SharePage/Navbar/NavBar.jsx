@@ -14,7 +14,7 @@ const NavBar = () => {
     const NavLinks = <div className="flex flex-col md:flex-row gap-4 gap-y-2">
         <NavLink to='/' className='hover:bg-sky-400 rounded-md hover:text-white p-2'>HOME</NavLink>
         <NavLink to='/add-blog' className='hover:bg-sky-400 rounded-md hover:text-white p-2'>ADD BLOG</NavLink>
-        <NavLink to='/all-blog' className='hover:bg-sky-400 rounded-md hover:text-white p-2'>ALL BLOGS</NavLink>
+        <NavLink to='/all-blogs' className='hover:bg-sky-400 rounded-md hover:text-white p-2'>ALL BLOGS</NavLink>
         <NavLink to='/featured-blog' className='hover:bg-sky-400 rounded-md hover:text-white p-2'>FEATURED BLOG</NavLink>
         <NavLink to='/with-list' className='hover:bg-sky-400 rounded-md hover:text-white p-2'>WISHLIST</NavLink>
         { user ? <button className='hover:bg-sky-400 rounded-md hover:text-white p-2' onClick={handleLogout}>LOGOUT</button>:
@@ -23,7 +23,7 @@ const NavBar = () => {
     </div>
     
     return (
-        <div className="bg-sky-100 rounded-md w-11/12 mx-auto p-2  md:py-4">
+        <div className="bg-sky-100 rounded-md mx-auto p-2 pl-6  md:py-4">
             <div className="flex items-center lg:px-4">
                 <div>
                     <h1 className="text-4xl font-bold">
