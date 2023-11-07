@@ -9,6 +9,7 @@ import AllBlogs from "../Pages/AllBlog/AllBlogs";
 import BlogDetails from "../Pages/BlogDetails/BlogDetails";
 import WishLists from "../Pages/WishList/WishLists";
 import PrivetRout from "./PrivetRouts";
+import FeatureBlog from "../Pages/FeatureBlog/FeatureBlog";
 
 const router = createBrowserRouter([
     {
@@ -29,7 +30,7 @@ const router = createBrowserRouter([
         },
         {
           path:'/add-blog',
-          element: <AddBlog></AddBlog>
+          element: <PrivetRout><AddBlog></AddBlog></PrivetRout>
         },
         {
           path:'/all-blogs',
@@ -43,6 +44,11 @@ const router = createBrowserRouter([
         {
           path: '/withlists',
           element: <PrivetRout><WishLists></WishLists></PrivetRout>
+        },
+        {
+          path:'/features-blog',
+          element: <FeatureBlog></FeatureBlog>,
+          loader: () => fetch('http://localhost:5000/sort-Blog')
         }
       ]
     },

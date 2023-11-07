@@ -45,7 +45,7 @@ const BlogDetails = () => {
 
                 <form className="my-2" onSubmit={handleComent}>
                     <label htmlFor="comment" className="text-xl font-bold">Comment Here</label><br />
-                    <textarea name="comment" id="" cols="80" className="border-2 border-sky-400 rounded-lg p-2" rows="5"></textarea><br />
+                    <textarea name="comment" id="" cols="70" className="border-2 border-sky-400 rounded-lg p-2" rows="5"></textarea><br />
                     <button className="bg-sky-400 text-white p-2 rounded-lg mb-6">Submit Comment</button>
                 </form>
                 <h1>Total Comment: {comments.length}</h1>
@@ -68,7 +68,7 @@ const BlogDetails = () => {
             <div className="ml-6">
                 <h1 className="text-2xl font-bold mb-4">{Blog.title}</h1>
                 <h1>Total Comment: {comments.length}</h1>
-                <p>{Blog.CurrentTime.toString()}</p>
+                <p>{Blog.CurrentTime}</p>
                 <button className="bg-sky-400 py-2 px-6 my-2  rounded-r-lg text-white">{Blog.Category}</button>
                 <p>{Blog.shorDes}</p>
                 <h3 className="text-2xl font-bold mt-6">Blog Description</h3>

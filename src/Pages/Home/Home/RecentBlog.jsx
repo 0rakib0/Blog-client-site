@@ -7,7 +7,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2'
 const RecentBlog = ({ blog}) => {
     const {user} = useContext(authContext)
-    const { _id, title, blogPpic, Category, shorDes } = blog
+    const { _id, title, blogPpic, Category, shorDes, details } = blog
     const handleWishList = (id, title, blogPpic, shorDes) =>{
         const wishList = {
             email: user.email,
@@ -37,6 +37,7 @@ const RecentBlog = ({ blog}) => {
             <div className="md:w-3/5 mx-2">
                 <h1 className="text-xl font-bold mb-2">{title}</h1>
                 <p>{shorDes}</p>
+                <p>Details lenght: {details.length}</p>
                 <button className="bg-sky-400 text-white px-2 my-2 rounded-md flex items-center gap-2"><AiOutlineApartment></AiOutlineApartment>{Category}</button>
                 <div className="flex gap-4">
                     <Link to={`/blog-details/${_id}`} className="bg-sky-400 text-white p-2 my-2 rounded-md flex items-center gap-2">Details</Link>

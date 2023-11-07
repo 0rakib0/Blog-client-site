@@ -19,14 +19,17 @@ const WishList = ({ data, habndleDelete }) => {
 
                 <Stack>
                     <CardBody>
-                        <Heading size='md'><Link to={`/blog-details/${id}`}>{title}</Link></Heading>
+                        <Heading size='md'>{title}</Heading>
 
                         <Text py='2'>
                             {shorDes}
                         </Text>
                     </CardBody>
 
-                    <CardFooter>
+                    <CardFooter className="space-x-2">
+                        <Button variant='solid' colorScheme='blue'>
+                           <Link to={`/blog-details/${id}`}>Details</Link>
+                        </Button>
                         <Button onClick={() =>habndleDelete(_id)} variant='solid' colorScheme='red'>
                             Remove
                         </Button>

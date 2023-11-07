@@ -1,9 +1,11 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
+import { authContext } from "../../AuthProvider/AuthProvider";
 
 const AddBlog = () => {
 
+    const {user} = useContext(authContext)
 
     const [category, setCategory] = useState([])
     const CurrentTime = new Date()
@@ -44,7 +46,9 @@ const AddBlog = () => {
             Category,
             shorDes,
             details,
-            CurrentTime
+            CurrentTime,
+            userName: user?.displayName,
+            userPic: user?.photoURL
         }
 
         console.log(Blog)

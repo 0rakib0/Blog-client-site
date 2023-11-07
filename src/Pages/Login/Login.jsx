@@ -6,9 +6,26 @@ import Swal from 'sweetalert2'
 
 
 const Login = () => {
-    const { Login } = useContext(authContext)
+    const { Login, GooogleLogin } = useContext(authContext)
     const [error, setError] = useState('')
     const naviget = useNavigate()
+
+
+    const handleGoogleLogin = () => {
+        GooogleLogin()
+            .then(result => {
+                console.log(result.user)
+                Swal.fire(
+                    'Login Success!',
+                    'Your Account Successfully Login!',
+                    'success'
+                )
+                naviget('/')
+            })
+            .catch(error => {
+                setError(error.message)
+            })
+    }
 
     const handleLogin = (event) => {
         event.preventDefault()
@@ -56,6 +73,10 @@ const Login = () => {
                     <div className="flex flex-col">
                         <input type="submit" value='Login' className="border-2 border-sky-100 p-2 h-12 rounded-lg mt-4 hover:bg-sky-400 hover:text-white" required />
                     </div>
+                    <div className="flex flex-col">
+                        <button type="submit" onClick={handleGoogleLogin} value='Login' className="border-2 border-sky-100 h-12 rounded-lg mt-2 bg-sky-400 text-white" required>Google Login</button>
+                    </div>
+
                     <p className="my-4">Do Not Have Account? <Link className="text-blue-600" to='/register'>Register</Link></p>
                 </div>
             </form>

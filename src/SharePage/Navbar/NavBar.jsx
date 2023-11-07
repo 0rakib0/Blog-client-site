@@ -15,7 +15,7 @@ const NavBar = () => {
         <NavLink to='/' className='hover:bg-sky-400 rounded-md hover:text-white p-2'>HOME</NavLink>
         <NavLink to='/add-blog' className='hover:bg-sky-400 rounded-md hover:text-white p-2'>ADD BLOG</NavLink>
         <NavLink to='/all-blogs' className='hover:bg-sky-400 rounded-md hover:text-white p-2'>ALL BLOGS</NavLink>
-        <NavLink to='/featured-blog' className='hover:bg-sky-400 rounded-md hover:text-white p-2'>FEATURED BLOG</NavLink>
+        <NavLink to='/features-blog' className='hover:bg-sky-400 rounded-md hover:text-white p-2'>FEATURED BLOG</NavLink>
         <NavLink to='/withlists' className='hover:bg-sky-400 rounded-md hover:text-white p-2'>WISHLIST</NavLink>
         { user ? <button className='hover:bg-sky-400 rounded-md hover:text-white p-2' onClick={handleLogout}>LOGOUT</button>:
         <NavLink className='hover:bg-sky-400 rounded-md hover:text-white p-2' to='/login'>LOGIN</NavLink>
