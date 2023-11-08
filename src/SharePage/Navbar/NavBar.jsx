@@ -18,7 +18,7 @@ const NavBar = () => {
         <NavLink to='/features-blog' className='hover:bg-sky-400 rounded-md hover:text-white p-2'>FEATURED BLOG</NavLink>
         <NavLink to='/withlists' className='hover:bg-sky-400 rounded-md hover:text-white p-2'>WISHLIST</NavLink>
         { user ? <button className='hover:bg-sky-400 rounded-md hover:text-white p-2' onClick={handleLogout}>LOGOUT</button>:
-        <NavLink className='hover:bg-sky-400 rounded-md hover:text-white p-2' to='/login'>LOGIN</NavLink>
+        <NavLink className='hover:bg-sky-400 rounded-md hover:text-white p-2' to='/login'>LOGIN/REGISTER</NavLink>
         }
     </div>
     

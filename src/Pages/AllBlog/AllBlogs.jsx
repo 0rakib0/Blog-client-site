@@ -25,7 +25,7 @@ const AllBlogs = () => {
     }
 
     useEffect(() => {
-        fetch('http://localhost:5000/categorys')
+        fetch('http://localhost:5000/allcategorys')
             .then(res => res.json())
             .then(data => setCategorys(data))
     }, [])

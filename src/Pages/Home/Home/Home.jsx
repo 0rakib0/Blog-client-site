@@ -10,14 +10,16 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { motion, useAnimation } from 'framer-motion';
+import { useQuery } from "react-query";
+import ContentLoader from "react-content-loader";
 
 const Home = () => {
-    const [recentBlog, setRecentBlog] = useState([])
-    const [Categorys, setCategorys] = useState([])
+    // const [recentBlog, setRecentBlog] = useState([])
+    // const [Categorys, setCategorys] = useState([])
 
-    const [Featured, setFeatured] = useState([])
+    // const [Featured, setFeatured] = useState([])
 
-    const [comment, setComment] = useState([])
+    // const [comment, setComment] = useState([])
 
 
     const controls = useAnimation();
@@ -36,31 +38,58 @@ const Home = () => {
         };
     }, [controls]);
 
+    const { data: recentBlog, isLoading } = useQuery('recentblog', async () => {
+        const response = await fetch('http://localhost:5000/recent-blog');
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    });
 
 
-    useEffect(() => {
-        fetch('http://localhost:5000/recent-blog')
-            .then(res => res.json())
-            .then(data => setRecentBlog(data))
-    }, [])
+    // useEffect(() => {
+    //     fetch('http://localhost:5000/allcategorys')
+    //         .then(res => res.json())
+    //         .then(data => setCategorys(data))
+    // }, [])
 
-    useEffect(() => {
-        fetch('http://localhost:5000/category')
-            .then(res => res.json())
-            .then(data => setCategorys(data))
-    }, [])
+    const { data: Categorys} = useQuery('AllCategory', async () => {
+        const response = await fetch('http://localhost:5000/allcategorys');
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    });
 
-    useEffect(() => {
-        fetch('http://localhost:5000/sort-Blog')
-            .then(res => res.json())
-            .then(data => setFeatured(data))
-    }, [])
+    
 
-    useEffect(() => {
-        fetch('http://localhost:5000/comment')
-            .then(res => res.json())
-            .then(data => setComment(data))
-    }, [])
+    // useEffect(() => {
+    //     fetch('http://localhost:5000/sort-Blog')
+    //         .then(res => res.json())
+    //         .then(data => setFeatured(data))
+    // }, [])
+
+    const { data: Featured} = useQuery('Featured', async () => {
+        const response = await fetch('http://localhost:5000/sort-Blog');
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    });
+
+    // useEffect(() => {
+    //     fetch('http://localhost:5000/comment')
+    //         .then(res => res.json())
+    //         .then(data => setComment(data))
+    // }, [])
+
+    const { data: comment} = useQuery('comment', async () => {
+        const response = await fetch('http://localhost:5000/comment');
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    });
 
     const handleNewsLatter = e => {
         e.preventDefault()
@@ -80,6 +109,24 @@ const Home = () => {
                     form.reset()
                 }
             })
+    }
+
+    if(isLoading){
+        return <ContentLoader
+            speed={2}
+            width={400}
+            height={160}
+            viewBox="0 0 400 160"
+            backgroundColor="#f3f3f3"
+            foregroundColor="#ecebeb"
+        >
+            <rect x="48" y="8" rx="3" ry="3" width="88" height="6" />
+            <rect x="48" y="26" rx="3" ry="3" width="52" height="6" />
+            <rect x="0" y="56" rx="3" ry="3" width="410" height="6" />
+            <rect x="0" y="72" rx="3" ry="3" width="380" height="6" />
+            <rect x="0" y="88" rx="3" ry="3" width="178" height="6" />
+            <circle cx="20" cy="20" r="20" />
+        </ContentLoader>
     }
 
     return (
@@ -104,14 +151,14 @@ const Home = () => {
                 <div className="col-span-3">
 
                     {
-                        recentBlog.map(blog => <RecentBlog key={blog._id} blog={blog}></RecentBlog>)
+                        recentBlog?.map(blog => <RecentBlog key={blog._id} blog={blog}></RecentBlog>)
                     }
                     <Link to='/all-blogs'><button className="bg-sky-400 text-white p-2 rounded-lg">Read More Blog</button></Link>
                 </div>
                 <div className="col-span-2 ml-6 mt-0">
                     <h1 className="md:ml-12 text-2xl  font-semibold mb-6">Featured Blogs</h1>
                     {
-                        Featured.map(blog => <FeaturedBlog key={blog._id} blog={blog}></FeaturedBlog>)
+                        Featured?.map(blog => <FeaturedBlog key={blog._id} blog={blog}></FeaturedBlog>)
                     }
                     <h1 className="ml-8 mt-6 text-2xl  font-semibold mb-6">All Category</h1>
                     <div className="grid md:grid-cols-2 gap-2 ml-6">
@@ -137,7 +184,7 @@ const Home = () => {
                         transition={{ duration: 1 }}
                         className="ml-12 element-to-animate">
                         {
-                            comment.map(comment => <div key={comment._id} className="flex my-2 space-x-4">
+                            comment?.map(comment => <div key={comment._id} className="flex my-2 space-x-4">
                                 <Wrap>
                                     <WrapItem>
                                         <Avatar name='Dan Abrahmov' src={comment.userProfile} />

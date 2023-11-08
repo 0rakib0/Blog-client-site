@@ -7,6 +7,8 @@ import axios from 'axios';
 import Swal from 'sweetalert2'
 import { motion, useAnimation } from 'framer-motion';
 import { useEffect, useState } from "react";
+
+
 const RecentBlog = ({ blog }) => {
 
     const controls = useAnimation();
@@ -26,8 +28,17 @@ const RecentBlog = ({ blog }) => {
         };
     }, [controls]);
     const { user } = useContext(authContext)
+
+
     const { _id, title, blogPpic, Category, shorDes, details } = blog
     const handleWishList = (id, title, blogPpic, shorDes) => {
+        if (!user) {
+            Swal.fire({
+                title: "Login First",
+                text: "For Added to Wishlist please Login First!",
+                icon: "error"
+            });
+        }
         const wishList = {
             email: user.email,
             id,
@@ -51,7 +62,7 @@ const RecentBlog = ({ blog }) => {
     return (
         <motion.div initial={{ y: 100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 5, type: 'spring', damping: 10, stiffness: 100 }}
+            transition={{ duration: 1, type: 'spring', damping: 10, stiffness: 100 }}
             className="md:flex gap-4 my-4 bg-sky-100 p-2 rounded-lg element-to-animate">
             <div>
                 <img src={blogPpic} className="md:w-[400px] md:h-[200px]" alt="" />
