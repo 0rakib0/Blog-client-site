@@ -42,7 +42,7 @@ const router = createBrowserRouter([
         {
           path:'/blog-details/:id',
           element: <PrivetRout><BlogDetails></BlogDetails></PrivetRout>,
-          loader: ({params}) => fetch(`http://localhost:5000/single-blog/${params.id}`)
+          loader: ({params}) => fetch(`https://b8a11-server-side-0rakib0.vercel.app/single-blog/${params.id}`)
         },
         {
           path: '/withlists',
@@ -51,12 +51,12 @@ const router = createBrowserRouter([
         {
           path:'/features-blog',
           element: <FeatureBlog></FeatureBlog>,
-          loader: () => fetch('http://localhost:5000/sort-Blog')
+          loader: () => fetch('https://b8a11-server-side-0rakib0.vercel.app/sort-Blog')
         },
         {
           path: '/updateblog/:id',
           element: <PrivetRout> <UpdateBlog></UpdateBlog> </PrivetRout>,
-          loader: ({params}) => fetch(`http://localhost:5000/single-blog/${params.id}`)
+          loader: ({params}) => fetch(`https://b8a11-server-side-0rakib0.vercel.app/single-blog/${params.id}`)
         }
       ]
     },

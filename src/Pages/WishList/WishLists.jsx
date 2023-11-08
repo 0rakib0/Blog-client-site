@@ -24,7 +24,7 @@ const WishLists = () => {
         }).then((result) => {
             if (result.isConfirmed) {
 
-                fetch(`http://localhost:5000/deleteWishlist/${id}`, {
+                fetch(`https://b8a11-server-side-0rakib0.vercel.app/deleteWishlist/${id}`, {
                     method: 'Delete'
                 })
                     .then(res => res.json())
@@ -35,6 +35,8 @@ const WishLists = () => {
                                 text: "Blog Successfully remove from your blog list.",
                                 icon: "success"
                             });
+                            const remaining = wistList.filter(wis => wis._id !== id)
+                            setWishList(remaining)
                         }
 
                     })
@@ -43,7 +45,7 @@ const WishLists = () => {
     }
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/wishlists/${user.email}`, {withCredentials: true})
+        axios.get(`https://b8a11-server-side-0rakib0.vercel.app/wishlists/${user.email}`, {withCredentials: true})
             .then(res => setWishList(res.data))
     }, [])
     return (

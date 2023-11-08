@@ -4,9 +4,9 @@ import { useQuery } from "react-query";
 import ContentLoader from "react-content-loader";
 
 const Categor = () => {
-    
+
     const { data: category, isLoading } = useQuery('category', async () => {
-        const response = await fetch('http://localhost:5000/category');
+        const response = await fetch('https://b8a11-server-side-0rakib0.vercel.app/category');
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }

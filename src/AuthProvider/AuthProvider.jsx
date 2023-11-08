@@ -39,12 +39,12 @@ const AuthProvider = ({ children }) => {
             const userCurrent = currentUser?.email || user?.email;
             const loggedUser = { email: userCurrent }
             if (currentUser) {
-                axios.post('http://localhost:5000/jwt', loggedUser, { withCredentials: true })
+                axios.post('https://b8a11-server-side-0rakib0.vercel.app/jwt', loggedUser, { withCredentials: true })
                     .then(res => {
                         console.log(res.data)
                     })
             } else {
-                axios.post('http://localhost:5000/logout', loggedUser, {
+                axios.post('https://b8a11-server-side-0rakib0.vercel.app/logout', loggedUser, {
                     withCredentials: true
                 })
                     .then(res => {

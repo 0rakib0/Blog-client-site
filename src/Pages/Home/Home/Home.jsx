@@ -39,7 +39,7 @@ const Home = () => {
     }, [controls]);
 
     const { data: recentBlog, isLoading } = useQuery('recentblog', async () => {
-        const response = await fetch('http://localhost:5000/recent-blog');
+        const response = await fetch('https://b8a11-server-side-0rakib0.vercel.app/recent-blog');
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
@@ -48,13 +48,13 @@ const Home = () => {
 
 
     // useEffect(() => {
-    //     fetch('http://localhost:5000/allcategorys')
+    //     fetch('https://b8a11-server-side-0rakib0.vercel.app/allcategorys')
     //         .then(res => res.json())
     //         .then(data => setCategorys(data))
     // }, [])
 
     const { data: Categorys} = useQuery('AllCategory', async () => {
-        const response = await fetch('http://localhost:5000/allcategorys');
+        const response = await fetch('https://b8a11-server-side-0rakib0.vercel.app/allcategorys');
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
@@ -64,13 +64,13 @@ const Home = () => {
     
 
     // useEffect(() => {
-    //     fetch('http://localhost:5000/sort-Blog')
+    //     fetch('https://b8a11-server-side-0rakib0.vercel.app/sort-Blog')
     //         .then(res => res.json())
     //         .then(data => setFeatured(data))
     // }, [])
 
     const { data: Featured} = useQuery('Featured', async () => {
-        const response = await fetch('http://localhost:5000/sort-Blog');
+        const response = await fetch('https://b8a11-server-side-0rakib0.vercel.app/sort-Blog');
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
@@ -78,13 +78,13 @@ const Home = () => {
     });
 
     // useEffect(() => {
-    //     fetch('http://localhost:5000/comment')
+    //     fetch('https://b8a11-server-side-0rakib0.vercel.app/comment')
     //         .then(res => res.json())
     //         .then(data => setComment(data))
     // }, [])
 
     const { data: comment} = useQuery('comment', async () => {
-        const response = await fetch('http://localhost:5000/comment');
+        const response = await fetch('https://b8a11-server-side-0rakib0.vercel.app/comment');
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
@@ -98,7 +98,7 @@ const Home = () => {
             email
         }
 
-        axios.post('http://localhost:5000/newslatter', user)
+        axios.post('https://b8a11-server-side-0rakib0.vercel.app/newslatter', user)
             .then(res => {
                 if (res.data.insertedId) {
                     Swal.fire(

@@ -11,7 +11,7 @@ const UpdateBlog = () => {
     const [category, setCategory] = useState([])
     console.log(category)
     useEffect(() => {
-        fetch('http://localhost:5000/allcategorys')
+        fetch('https://b8a11-server-side-0rakib0.vercel.app/allcategorys')
             .then(res => res.json())
             .then(data => setCategory(data))
     }, [])
@@ -45,7 +45,7 @@ const UpdateBlog = () => {
         }
 
         console.log(Blog)
-        axios.put(`http://localhost:5000/updateBlog/${Blog._id}`, UpdateBlog)
+        axios.put(`https://b8a11-server-side-0rakib0.vercel.app/updateBlog/${Blog._id}`, UpdateBlog)
             .then(response => {
                 // Handle the success response here
                 if (response.data.modifiedCount > 0) {

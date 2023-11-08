@@ -25,16 +25,16 @@ const AllBlogs = () => {
     }
 
     useEffect(() => {
-        fetch('http://localhost:5000/allcategorys')
+        fetch('https://b8a11-server-side-0rakib0.vercel.app/allcategorys')
             .then(res => res.json())
             .then(data => setCategorys(data))
     }, [])
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/all-blog?category=${selectCategory}&title=${selectTitle}`)
+        axios.get(`https://b8a11-server-side-0rakib0.vercel.app/all-blog?category=${selectCategory}&title=${selectTitle}`)
             .then(data => setBlogs(data.data))
 
-        // fetch('http://localhost:5000/all-blog')
+        // fetch('https://b8a11-server-side-0rakib0.vercel.app/all-blog')
         // .then(res => res.json())
         // .then(data => setBlogs(data))
     }, [selectCategory, selectTitle])
