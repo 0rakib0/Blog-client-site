@@ -4,6 +4,7 @@ import RecentBlog from "../Home/Home/RecentBlog";
 import Category2 from "../Home/Category/Category2";
 import { Avatar, Wrap, WrapItem } from "@chakra-ui/react";
 import { AiFillFacebook, AiOutlineApartment, AiOutlineInstagram, AiOutlineSearch, AiOutlineWhatsApp, AiOutlineYoutube } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 const AllBlogs = () => {
     const [blogs, setBlogs] = useState([])
@@ -67,20 +68,6 @@ const AllBlogs = () => {
 
                 </div>
                 <div className="col-span-2 ml-6 mt-0">
-                    <h1 className="md:ml-12 text-2xl  font-semibold mb-6">Popular Post</h1>
-                    <div className="flex ml-6">
-                        <div className="h-[130px] w-2/3 md:mx-4">
-                            <img src="https://t4.ftcdn.net/jpg/02/80/82/81/360_F_280828158_ZZ2W8atYMHiSkLoDzxgDHNhdmXJ31jCR.jpg" className="h-full" alt="" />
-                        </div>
-                        <div className="ml-1">
-                            <h1 className="text-xl font-semibold ">Traveling is the best way to world</h1>
-                            <button className="bg-sky-400 text-white px-2 my-2 rounded-md flex items-center gap-2"><AiOutlineApartment></AiOutlineApartment> Travel</button>
-                            <div className="flex gap-2">
-                                <button className="bg-sky-400 text-white px-1 my-2 rounded-md flex items-center">Details</button>
-                                <button className="bg-sky-400 text-white px-1 py-[2px] my-2 rounded-md flex items-center gap-2">Add To Wish List</button>
-                            </div>
-                        </div>
-                    </div>
                     <h1 className="ml-8 mt-6 text-2xl  font-semibold mb-6">All Category</h1>
                     <div className="grid md:grid-cols-2 gap-2 ml-6">
                         {

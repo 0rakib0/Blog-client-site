@@ -1,15 +1,20 @@
 import Categor from "../Category/Categor";
 import Banner from "./Banner/Banner";
-import { AiOutlineApartment } from "react-icons/ai";
 import RecentBlog from "./RecentBlog";
 import { useEffect, useState } from "react";
 import { AiFillFacebook, AiOutlineWhatsApp, AiOutlineInstagram, AiOutlineYoutube } from "react-icons/ai";
 import { Avatar, Wrap, WrapItem } from "@chakra-ui/react";
 import Category2 from "../Category/Category2";
+import FeaturedBlog from "./FeaturedBlog";
+import { Link } from "react-router-dom";
 
 const Home = () => {
     const [recentBlog, setRecentBlog] = useState([])
     const [Categorys, setCategorys] = useState([])
+
+    const [Featured, setFeatured] = useState([])
+
+    const [comment, setComment] = useState([])
 
     useEffect(() => {
         fetch('http://localhost:5000/recent-blog')
@@ -17,11 +22,24 @@ const Home = () => {
             .then(data => setRecentBlog(data))
     }, [])
 
-    useEffect(() =>{
+    useEffect(() => {
         fetch('http://localhost:5000/categorys')
-        .then(res => res.json())
-        .then(data => setCategorys(data))
-    },[])
+            .then(res => res.json())
+            .then(data => setCategorys(data))
+    }, [])
+
+    useEffect(() => {
+        fetch('http://localhost:5000/sort-Blog')
+            .then(res => res.json())
+            .then(data => setFeatured(data))
+    }, [])
+
+    useEffect(() => {
+        fetch('http://localhost:5000/comment')
+            .then(res => res.json())
+            .then(data => setComment(data))
+    }, [])
+
 
     return (
         <div className="w-11/12 mx-auto">
@@ -41,23 +59,13 @@ const Home = () => {
                     {
                         recentBlog.map(blog => <RecentBlog key={blog._id} blog={blog}></RecentBlog>)
                     }
-
+                    <Link to='/all-blogs'><button className="bg-sky-400 text-white p-2 rounded-lg">Read More Blog</button></Link>
                 </div>
                 <div className="col-span-2 ml-6 mt-0">
-                    <h1 className="md:ml-12 text-2xl  font-semibold mb-6">Popular Post</h1>
-                    <div className="flex ml-6">
-                        <div className="h-[130px] w-2/3 md:mx-4">
-                            <img src="https://t4.ftcdn.net/jpg/02/80/82/81/360_F_280828158_ZZ2W8atYMHiSkLoDzxgDHNhdmXJ31jCR.jpg" className="h-full" alt="" />
-                        </div>
-                        <div className="ml-1">
-                            <h1 className="text-xl font-semibold ">Traveling is the best way to world</h1>
-                            <button className="bg-sky-400 text-white px-2 my-2 rounded-md flex items-center gap-2"><AiOutlineApartment></AiOutlineApartment> Travel</button>
-                            <div className="flex gap-2">
-                                <button className="bg-sky-400 text-white px-1 my-2 rounded-md flex items-center">Details</button>
-                                <button className="bg-sky-400 text-white px-1 py-[2px] my-2 rounded-md flex items-center gap-2">Add To Wish List</button>
-                            </div>
-                        </div>
-                    </div>
+                    <h1 className="md:ml-12 text-2xl  font-semibold mb-6">Featured Blogs</h1>
+                    {
+                        Featured.map(blog => <FeaturedBlog key={blog._id} blog={blog}></FeaturedBlog>)
+                    }
                     <h1 className="ml-8 mt-6 text-2xl  font-semibold mb-6">All Category</h1>
                     <div className="grid md:grid-cols-2 gap-2 ml-6">
                         {
@@ -78,17 +86,19 @@ const Home = () => {
 
                     <h1 className="text-2xl md:mt-12 font-bold ml-12">Recent Comment</h1>
                     <div className="ml-12">
-                        <div className="flex my-2 space-x-4">
-                            <Wrap>
-                                <WrapItem>
-                                    <Avatar name='Dan Abrahmov' src='https://bit.ly/dan-abramov' />
-                                </WrapItem>
-                            </Wrap>
-                            <div className="">
-                                <h4 className="text-xl font-semibold">Rakibul Hasan</h4>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad itaque ea cupiditate numquam illum, sapiente explicabo! Vitae beatae quis quasi?</p>
-                            </div>
-                        </div>
+                        {
+                            comment.map(comment => <div key={comment._id} className="flex my-2 space-x-4">
+                                <Wrap>
+                                    <WrapItem>
+                                        <Avatar name='Dan Abrahmov' src={comment.userProfile} />
+                                    </WrapItem>
+                                </Wrap>
+                                <div className="">
+                                    <h4 className="text-xl font-semibold">{comment.email}</h4>
+                                    <p>{comment.comment}</p>
+                                </div>
+                            </div>)
+                        }
                     </div>
                 </div>
             </div>
@@ -96,7 +106,7 @@ const Home = () => {
                 <h4 className="text-4xl font-bold my-2">Subscirve To Our News Latter</h4>
                 <p className="mb-4">subscribe our Pachange and get a valuable discount</p>
                 <input type="email" placeholder="Enter Email" className="border-2 w-3/5 border-sky-400 p-2 h-12 rounded-l-lg z-10 " name="email" required />
-                 <button className="bg-sky-400 h-12 px-4 rounded-r-lg text-white">Subscribe</button>
+                <button className="bg-sky-400 h-12 px-4 rounded-r-lg text-white">Subscribe</button>
             </div>
         </div>
     );
