@@ -47,7 +47,7 @@ const RecentBlog = ({ blog }) => {
             shorDes
 
         }
-        axios.post('https://b8a11-server-side-0rakib0.vercel.app/addToWishlist', wishList)
+        axios.post('https://blog-zeta-seven-90.vercel.app/addToWishlist', wishList)
             .then(res => {
                 console.log(res.data)
                 if (res.data.insertedId) {

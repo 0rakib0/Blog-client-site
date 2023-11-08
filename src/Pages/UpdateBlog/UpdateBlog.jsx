@@ -7,15 +7,15 @@ import Swal from "sweetalert2"
 
 const UpdateBlog = () => {
     const Blog = useLoaderData()
-    const {user} = useContext(authContext)
+    const { user } = useContext(authContext)
     const [category, setCategory] = useState([])
     console.log(category)
     useEffect(() => {
-        fetch('https://b8a11-server-side-0rakib0.vercel.app/allcategorys')
+        fetch('https://blog-zeta-seven-90.vercel.app/allcategorys')
             .then(res => res.json())
             .then(data => setCategory(data))
     }, [])
-    
+
 
     const handleUpdateBlog = (event) => {
         event.preventDefault()
@@ -45,7 +45,7 @@ const UpdateBlog = () => {
         }
 
         console.log(Blog)
-        axios.put(`https://b8a11-server-side-0rakib0.vercel.app/updateBlog/${Blog._id}`, UpdateBlog)
+        axios.put(`https://blog-zeta-seven-90.vercel.app/updateBlog/${Blog._id}`, UpdateBlog)
             .then(response => {
                 // Handle the success response here
                 if (response.data.modifiedCount > 0) {

@@ -39,7 +39,7 @@ const Home = () => {
     }, [controls]);
 
     const { data: recentBlog, isLoading } = useQuery('recentblog', async () => {
-        const response = await fetch('https://b8a11-server-side-0rakib0.vercel.app/recent-blog');
+        const response = await fetch('https://blog-zeta-seven-90.vercel.app/recent-blog');
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
@@ -48,29 +48,29 @@ const Home = () => {
 
 
     // useEffect(() => {
-    //     fetch('https://b8a11-server-side-0rakib0.vercel.app/allcategorys')
+    //     fetch('https://blog-zeta-seven-90.vercel.app/allcategorys')
     //         .then(res => res.json())
     //         .then(data => setCategorys(data))
     // }, [])
 
-    const { data: Categorys} = useQuery('AllCategory', async () => {
-        const response = await fetch('https://b8a11-server-side-0rakib0.vercel.app/allcategorys');
+    const { data: Categorys } = useQuery('AllCategory', async () => {
+        const response = await fetch('https://blog-zeta-seven-90.vercel.app/allcategorys');
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
         return response.json();
     });
 
-    
+
 
     // useEffect(() => {
-    //     fetch('https://b8a11-server-side-0rakib0.vercel.app/sort-Blog')
+    //     fetch('https://blog-zeta-seven-90.vercel.app/sort-Blog')
     //         .then(res => res.json())
     //         .then(data => setFeatured(data))
     // }, [])
 
-    const { data: Featured} = useQuery('Featured', async () => {
-        const response = await fetch('https://b8a11-server-side-0rakib0.vercel.app/sort-Blog');
+    const { data: Featured } = useQuery('Featured', async () => {
+        const response = await fetch('https://blog-zeta-seven-90.vercel.app/sort-Blog');
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
@@ -78,13 +78,13 @@ const Home = () => {
     });
 
     // useEffect(() => {
-    //     fetch('https://b8a11-server-side-0rakib0.vercel.app/comment')
+    //     fetch('https://blog-zeta-seven-90.vercel.app/comment')
     //         .then(res => res.json())
     //         .then(data => setComment(data))
     // }, [])
 
-    const { data: comment} = useQuery('comment', async () => {
-        const response = await fetch('https://b8a11-server-side-0rakib0.vercel.app/comment');
+    const { data: comment } = useQuery('comment', async () => {
+        const response = await fetch('https://blog-zeta-seven-90.vercel.app/comment');
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
@@ -98,7 +98,7 @@ const Home = () => {
             email
         }
 
-        axios.post('https://b8a11-server-side-0rakib0.vercel.app/newslatter', user)
+        axios.post('https://blog-zeta-seven-90.vercel.app/newslatter', user)
             .then(res => {
                 if (res.data.insertedId) {
                     Swal.fire(
@@ -106,12 +106,12 @@ const Home = () => {
                         'You Subscription successfully submited!',
                         'success'
                     )
-                    form.reset()
+
                 }
             })
     }
 
-    if(isLoading){
+    if (isLoading) {
         return <ContentLoader
             speed={2}
             width={400}
@@ -163,7 +163,7 @@ const Home = () => {
                     <h1 className="ml-8 mt-6 text-2xl  font-semibold mb-6">All Category</h1>
                     <div className="grid md:grid-cols-2 gap-2 ml-6">
                         {
-                            Categorys.map(category => <Category2 key={category._id} category={category}></Category2>)
+                            Categorys?.map(category => <Category2 key={category._id} category={category}></Category2>)
                         }
                     </div>
                     <h1 className="text-2xl md:mt-12 font-bold ml-12">Social Plugin</h1>

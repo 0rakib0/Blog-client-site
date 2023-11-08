@@ -14,52 +14,52 @@ import UpdateBlog from "../Pages/UpdateBlog/UpdateBlog";
 import Error from "../Pages/ErrorPage/Error";
 
 const router = createBrowserRouter([
-    {
-      path: "/",
-      errorElement: <Error></Error>,
-      element: <RootPage></RootPage>,
-      children: [
-        {
-            path: '/',
-            element: <Home></Home>
-        },
-        {
-            path:'/register',
-            element: <Register></Register>
-        },
-        {
-            path:'/login',
-            element: <Login></Login>
-        },
-        {
-          path:'/add-blog',
-          element: <PrivetRout><AddBlog></AddBlog></PrivetRout>
-        },
-        {
-          path:'/all-blogs',
-          element: <AllBlogs></AllBlogs>
-        },
-        {
-          path:'/blog-details/:id',
-          element: <PrivetRout><BlogDetails></BlogDetails></PrivetRout>,
-          loader: ({params}) => fetch(`https://b8a11-server-side-0rakib0.vercel.app/single-blog/${params.id}`)
-        },
-        {
-          path: '/withlists',
-          element: <PrivetRout><WishLists></WishLists></PrivetRout>
-        },
-        {
-          path:'/features-blog',
-          element: <FeatureBlog></FeatureBlog>,
-          loader: () => fetch('https://b8a11-server-side-0rakib0.vercel.app/sort-Blog')
-        },
-        {
-          path: '/updateblog/:id',
-          element: <PrivetRout> <UpdateBlog></UpdateBlog> </PrivetRout>,
-          loader: ({params}) => fetch(`https://b8a11-server-side-0rakib0.vercel.app/single-blog/${params.id}`)
-        }
-      ]
-    },
-  ]);
+  {
+    path: "/",
+    errorElement: <Error></Error>,
+    element: <RootPage></RootPage>,
+    children: [
+      {
+        path: '/',
+        element: <Home></Home>
+      },
+      {
+        path: '/register',
+        element: <Register></Register>
+      },
+      {
+        path: '/login',
+        element: <Login></Login>
+      },
+      {
+        path: '/add-blog',
+        element: <PrivetRout><AddBlog></AddBlog></PrivetRout>
+      },
+      {
+        path: '/all-blogs',
+        element: <AllBlogs></AllBlogs>
+      },
+      {
+        path: '/blog-details/:id',
+        element: <PrivetRout><BlogDetails></BlogDetails></PrivetRout>,
+        loader: ({ params }) => fetch(`https://blog-zeta-seven-90.vercel.app/single-blog/${params.id}`)
+      },
+      {
+        path: '/withlists',
+        element: <PrivetRout><WishLists></WishLists></PrivetRout>
+      },
+      {
+        path: '/features-blog',
+        element: <FeatureBlog></FeatureBlog>,
+        loader: () => fetch('https://blog-zeta-seven-90.vercel.app/sort-Blog')
+      },
+      {
+        path: '/updateblog/:id',
+        element: <PrivetRout> <UpdateBlog></UpdateBlog> </PrivetRout>,
+        loader: ({ params }) => fetch(`https://blog-zeta-seven-90.vercel.app/single-blog/${params.id}`)
+      }
+    ]
+  },
+]);
 
-  export default router;
+export default router;

@@ -24,7 +24,7 @@ const WishLists = () => {
         }).then((result) => {
             if (result.isConfirmed) {
 
-                fetch(`https://b8a11-server-side-0rakib0.vercel.app/deleteWishlist/${id}`, {
+                fetch(`https://blog-zeta-seven-90.vercel.app/deleteWishlist/${id}`, {
                     method: 'Delete'
                 })
                     .then(res => res.json())
@@ -45,7 +45,7 @@ const WishLists = () => {
     }
 
     useEffect(() => {
-        axios.get(`https://b8a11-server-side-0rakib0.vercel.app/wishlists/${user.email}`, {withCredentials: true})
+        axios.get(`https://blog-zeta-seven-90.vercel.app/wishlists/${user.email}`, { withCredentials: true })
             .then(res => setWishList(res.data))
     }, [])
     return (

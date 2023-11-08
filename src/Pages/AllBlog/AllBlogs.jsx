@@ -5,6 +5,7 @@ import Category2 from "../Home/Category/Category2";
 import { Avatar, Wrap, WrapItem } from "@chakra-ui/react";
 import { AiFillFacebook, AiOutlineApartment, AiOutlineInstagram, AiOutlineSearch, AiOutlineWhatsApp, AiOutlineYoutube } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import { useQuery } from "react-query";
 
 const AllBlogs = () => {
     const [blogs, setBlogs] = useState([])
@@ -18,28 +19,27 @@ const AllBlogs = () => {
         setCelectCategory(e.target.value)
     }
 
-    const handleTitle = e =>{
+    const handleTitle = e => {
         e.preventDefault()
         const titleVal = e.target.serch.value
         setSelectTitle(titleVal)
     }
 
     useEffect(() => {
-        fetch('https://b8a11-server-side-0rakib0.vercel.app/allcategorys')
+        fetch('https://blog-zeta-seven-90.vercel.app/allcategorys')
             .then(res => res.json())
             .then(data => setCategorys(data))
     }, [])
 
     useEffect(() => {
-        axios.get(`https://b8a11-server-side-0rakib0.vercel.app/all-blog?category=${selectCategory}&title=${selectTitle}`)
+        axios.get(`https://blog-zeta-seven-90.vercel.app/all-blog?category=${selectCategory}&title=${selectTitle}`)
             .then(data => setBlogs(data.data))
 
-        // fetch('https://b8a11-server-side-0rakib0.vercel.app/all-blog')
+        // fetch('https://blog-zeta-seven-90.vercel.app/all-blog')
         // .then(res => res.json())
         // .then(data => setBlogs(data))
     }, [selectCategory, selectTitle])
 
-    
 
     return (
         <div className="w-11/12 mx-auto">
@@ -83,21 +83,6 @@ const AllBlogs = () => {
                         <div className="flex gap-4 my-2 space-x-8 justify-center">
                             <h1 className="flex items-center gap-2 text-xl text-[#dd277b]"><AiOutlineInstagram></AiOutlineInstagram> Instagram</h1>
                             <h1 className="flex items-center gap-2 text-xl text-[#f50000]"><AiOutlineYoutube></AiOutlineYoutube> Youttube</h1>
-                        </div>
-                    </div>
-
-                    <h1 className="text-2xl md:mt-12 font-bold ml-12">Recent Comment</h1>
-                    <div className="ml-12">
-                        <div className="flex my-2 space-x-4">
-                            <Wrap>
-                                <WrapItem>
-                                    <Avatar name='Dan Abrahmov' src='https://bit.ly/dan-abramov' />
-                                </WrapItem>
-                            </Wrap>
-                            <div className="">
-                                <h4 className="text-xl font-semibold">Rakibul Hasan</h4>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad itaque ea cupiditate numquam illum, sapiente explicabo! Vitae beatae quis quasi?</p>
-                            </div>
                         </div>
                     </div>
                 </div>
