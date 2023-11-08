@@ -1,7 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import { authContext } from "../../AuthProvider/AuthProvider";
 import axios from "axios";
-import { Button, Card, CardBody, CardFooter, Heading, Image, Stack, Text } from "@chakra-ui/react";
+import WishList from "./WishList";
+import Swal from 'sweetalert2'
 
 const WishLists = () => {
     const { user } = useContext(authContext)
@@ -10,43 +11,49 @@ const WishLists = () => {
 
     console.log(user.email)
 
+    const habndleDelete = (id) => {
 
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                fetch(`http://localhost:5000/deleteWishlist/${id}`, {
+                    method: 'Delete'
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.deletedCount > 0) {
+                            Swal.fire({
+                                title: "Blog Successfully Remove",
+                                text: "Blog Successfully remove from your blog list.",
+                                icon: "success"
+                            });
+                        }
+
+                    })
+            }
+        });
+    }
 
     useEffect(() => {
         axios.get(`http://localhost:5000/wishlists/${user.email}`)
             .then(res => setWishList(res.data))
     }, [])
     return (
-        <div>
-            <Card
-                direction={{ base: 'column', sm: 'row' }}
-                overflow='hidden'
-                variant='outline'
-            >
-                <Image
-                    objectFit='cover'
-                    maxW={{ base: '100%', sm: '200px' }}
-                    src='https://images.unsplash.com/photo-1667489022797-ab608913feeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw5fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60'
-                    alt='Caffe Latte'
-                />
-
-                <Stack>
-                    <CardBody>
-                        <Heading size='md'>The perfect latte</Heading>
-
-                        <Text py='2'>
-                            Caffè latte is a coffee beverage of Italian origin made with espresso
-                            and steamed milk.
-                        </Text>
-                    </CardBody>
-
-                    <CardFooter>
-                        <Button variant='solid' colorScheme='blue'>
-                            Buy Latte
-                        </Button>
-                    </CardFooter>
-                </Stack>
-            </Card>
+        <div className="w-11/12">
+            <h1 className="text-2xl font-bold my-6 text-center">Your Favourit Blog List</h1>
+            <div className="w-11/12 grid mx-auto gap-6 my-6 md:grid-cols-2">
+                {
+                    wistList.map(wishList => <WishList key={wishList._id} habndleDelete={habndleDelete} data={wishList}></WishList>)
+                }
+            </div>
         </div>
     )
 }

@@ -8,12 +8,13 @@ import Swal from 'sweetalert2'
 const RecentBlog = ({ blog}) => {
     const {user} = useContext(authContext)
     const { _id, title, blogPpic, Category, shorDes } = blog
-    const handleWishList = (id, title, blogPpic) =>{
+    const handleWishList = (id, title, blogPpic, shorDes) =>{
         const wishList = {
             email: user.email,
             id,
             title,
-            blogPpic
+            blogPpic,
+            shorDes
 
         }
         axios.post('http://localhost:5000/addToWishlist', wishList)
@@ -39,7 +40,7 @@ const RecentBlog = ({ blog}) => {
                 <button className="bg-sky-400 text-white px-2 my-2 rounded-md flex items-center gap-2"><AiOutlineApartment></AiOutlineApartment>{Category}</button>
                 <div className="flex gap-4">
                     <Link to={`/blog-details/${_id}`} className="bg-sky-400 text-white p-2 my-2 rounded-md flex items-center gap-2">Details</Link>
-                    <button onClick={() =>handleWishList(_id, title, blogPpic)} className="bg-sky-400 text-white p-2 my-2 rounded-md flex items-center gap-2">Add To Wish List</button>
+                    <button onClick={() =>handleWishList(_id, title, blogPpic, shorDes)} className="bg-sky-400 text-white p-2 my-2 rounded-md flex items-center gap-2">Add To Wish List</button>
                 </div>
             </div>
         </div>
