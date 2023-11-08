@@ -7,6 +7,8 @@ import Login from "../Pages/Login/Login";
 import AddBlog from "../Pages/AddBlog/AddBlog";
 import AllBlogs from "../Pages/AllBlog/AllBlogs";
 import BlogDetails from "../Pages/BlogDetails/BlogDetails";
+import WishLists from "../Pages/WishList/WishLists";
+import PrivetRout from "./PrivetRouts";
 
 const router = createBrowserRouter([
     {
@@ -37,6 +39,10 @@ const router = createBrowserRouter([
           path:'/blog-details/:id',
           element: <BlogDetails></BlogDetails>,
           loader: ({params}) => fetch(`http://localhost:5000/single-blog/${params.id}`)
+        },
+        {
+          path: '/withlists',
+          element: <PrivetRout><WishLists></WishLists></PrivetRout>
         }
       ]
     },

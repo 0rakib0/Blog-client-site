@@ -37,6 +37,9 @@ const AllBlogs = () => {
         // .then(res => res.json())
         // .then(data => setBlogs(data))
     }, [selectCategory, selectTitle])
+
+    
+
     return (
         <div className="w-11/12 mx-auto">
             <div className="m-4 lg:flex justify-between">
