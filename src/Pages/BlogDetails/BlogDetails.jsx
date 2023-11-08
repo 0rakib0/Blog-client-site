@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import { authContext } from "../../AuthProvider/AuthProvider";
 import axios from "axios";
 import Swal from 'sweetalert2'
@@ -9,6 +9,8 @@ const BlogDetails = () => {
     const Blog = useLoaderData()
     const { user } = useContext(authContext)
     const [comments, setCommet] = useState([])
+
+    const naviget = useNavigate()
 
 
     useEffect(() => {
@@ -23,6 +25,7 @@ const BlogDetails = () => {
         const Comment = {
             comment,
             email: user?.email,
+            userName: user?.displayName,
             userProfile: user?.photoURL,
             blogId: Blog._id
         }
@@ -34,7 +37,9 @@ const BlogDetails = () => {
                         'Your Comment Successfully Submit',
                         'success'
                     )
+                    window.location.reload()
                 }
+
             })
     }
 
@@ -63,7 +68,7 @@ const BlogDetails = () => {
                                 </WrapItem>
                             </Wrap>
                             <div className="">
-                                <h4 className="text-xl font-semibold">{comment.email}</h4>
+                                <h4 className="text-xl font-semibold">{comment.userName}</h4>
                                 <p>{comment.comment}</p>
                             </div>
                         </div>
@@ -75,7 +80,7 @@ const BlogDetails = () => {
                 <h1>Total Comment: {comments.length}</h1>
                 <p>{Blog.CurrentTime}</p>
                 <button className="bg-sky-400 py-2 px-6 my-2 mr-4 rounded-lg text-white">{Blog.Category}</button>
-                {user.email == Blog.email && <button className="bg-sky-400 py-2 px-6 my-2  rounded-lg text-white">Update</button>
+                {user.email == Blog.email && <Link to={`/updateblog/${Blog._id}`}><button className="bg-sky-400 py-2 px-6 my-2  rounded-lg text-white">Update</button></Link>
                 }
 
                 <p>{Blog.shorDes}</p>

@@ -7,6 +7,9 @@ import { Avatar, Wrap, WrapItem } from "@chakra-ui/react";
 import Category2 from "../Category/Category2";
 import FeaturedBlog from "./FeaturedBlog";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import Swal from "sweetalert2";
+import { motion, useAnimation } from 'framer-motion';
 
 const Home = () => {
     const [recentBlog, setRecentBlog] = useState([])
@@ -16,6 +19,25 @@ const Home = () => {
 
     const [comment, setComment] = useState([])
 
+
+    const controls = useAnimation();
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 200) {
+                controls.start({ opacity: 1 });
+            } else {
+                controls.start({ opacity: 0 });
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, [controls]);
+
+
+
     useEffect(() => {
         fetch('http://localhost:5000/recent-blog')
             .then(res => res.json())
@@ -23,7 +45,7 @@ const Home = () => {
     }, [])
 
     useEffect(() => {
-        fetch('http://localhost:5000/categorys')
+        fetch('http://localhost:5000/category')
             .then(res => res.json())
             .then(data => setCategorys(data))
     }, [])
@@ -40,17 +62,42 @@ const Home = () => {
             .then(data => setComment(data))
     }, [])
 
+    const handleNewsLatter = e => {
+        e.preventDefault()
+        const email = e.target.email.value;
+        const user = {
+            email
+        }
+
+        axios.post('http://localhost:5000/newslatter', user)
+            .then(res => {
+                if (res.data.insertedId) {
+                    Swal.fire(
+                        '"Thank you for subscribing to our newsletter',
+                        'You Subscription successfully submited!',
+                        'success'
+                    )
+                    form.reset()
+                }
+            })
+    }
 
     return (
         <div className="w-11/12 mx-auto">
             {/* banner section */}
-            <div className="my-6">
+            <motion.div initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ duration: 1 }}
+                className="element-to-animate my-6">
                 <Banner></Banner>
-            </div>
+            </motion.div>
             {/* Category Section */}
-            <div>
+            <motion.div initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ duration: 1 }}
+                className="element-to-animate" >
                 <Categor></Categor>
-            </div>
+            </motion.div>
             {/* Main section0 */}
             <h1 className="text-2xl font-bold my-4">Read Recent Blog</h1>
             <div className="grid lg:grid-cols-5 items-start">
@@ -85,7 +132,10 @@ const Home = () => {
                     </div>
 
                     <h1 className="text-2xl md:mt-12 font-bold ml-12">Recent Comment</h1>
-                    <div className="ml-12">
+                    <motion.div initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        transition={{ duration: 1 }}
+                        className="ml-12 element-to-animate">
                         {
                             comment.map(comment => <div key={comment._id} className="flex my-2 space-x-4">
                                 <Wrap>
@@ -94,19 +144,21 @@ const Home = () => {
                                     </WrapItem>
                                 </Wrap>
                                 <div className="">
-                                    <h4 className="text-xl font-semibold">{comment.email}</h4>
+                                    <h4 className="text-xl font-semibold">{comment.userName}</h4>
                                     <p>{comment.comment}</p>
                                 </div>
                             </div>)
                         }
-                    </div>
+                    </motion.div>
                 </div>
             </div>
             <div className="bg-sky-100 text-center mx-auto py-6 rounded-lg pb-12">
                 <h4 className="text-4xl font-bold my-2">Subscirve To Our News Latter</h4>
                 <p className="mb-4">subscribe our Pachange and get a valuable discount</p>
-                <input type="email" placeholder="Enter Email" className="border-2 w-3/5 border-sky-400 p-2 h-12 rounded-l-lg z-10 " name="email" required />
-                <button className="bg-sky-400 h-12 px-4 rounded-r-lg text-white">Subscribe</button>
+                <form onSubmit={handleNewsLatter}>
+                    <input type="email" placeholder="Enter Email" className="border-2 w-3/5 border-sky-400 p-2 h-12 rounded-l-lg z-10 " name="email" required />
+                    <button className="bg-sky-400 h-12 px-4 rounded-r-lg text-white">Subscribe</button>
+                </form>
             </div>
         </div>
     );
