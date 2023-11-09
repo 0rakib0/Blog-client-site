@@ -39,7 +39,7 @@ const Home = () => {
     }, [controls]);
 
     const { data: recentBlog, isLoading } = useQuery('recentblog', async () => {
-        const response = await fetch('https://blog-zeta-seven-90.vercel.app/recent-blog');
+        const response = await fetch('https://b8a11-server-side-0rakib0.vercel.app/recent-blog');
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
@@ -48,13 +48,13 @@ const Home = () => {
 
 
     // useEffect(() => {
-    //     fetch('https://blog-zeta-seven-90.vercel.app/allcategorys')
+    //     fetch('https://b8a11-server-side-0rakib0.vercel.app/allcategorys')
     //         .then(res => res.json())
     //         .then(data => setCategorys(data))
     // }, [])
 
     const { data: Categorys } = useQuery('AllCategory', async () => {
-        const response = await fetch('https://blog-zeta-seven-90.vercel.app/allcategorys');
+        const response = await fetch('https://b8a11-server-side-0rakib0.vercel.app/allcategorys');
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
@@ -64,13 +64,13 @@ const Home = () => {
 
 
     // useEffect(() => {
-    //     fetch('https://blog-zeta-seven-90.vercel.app/sort-Blog')
+    //     fetch('https://b8a11-server-side-0rakib0.vercel.app/sort-Blog')
     //         .then(res => res.json())
     //         .then(data => setFeatured(data))
     // }, [])
 
     const { data: Featured } = useQuery('Featured', async () => {
-        const response = await fetch('https://blog-zeta-seven-90.vercel.app/sort-Blog');
+        const response = await fetch('https://b8a11-server-side-0rakib0.vercel.app/sort-Blog');
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
@@ -78,13 +78,13 @@ const Home = () => {
     });
 
     // useEffect(() => {
-    //     fetch('https://blog-zeta-seven-90.vercel.app/comment')
+    //     fetch('https://b8a11-server-side-0rakib0.vercel.app/comment')
     //         .then(res => res.json())
     //         .then(data => setComment(data))
     // }, [])
 
     const { data: comment } = useQuery('comment', async () => {
-        const response = await fetch('https://blog-zeta-seven-90.vercel.app/comment');
+        const response = await fetch('https://b8a11-server-side-0rakib0.vercel.app/comment');
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
@@ -98,7 +98,7 @@ const Home = () => {
             email
         }
 
-        axios.post('https://blog-zeta-seven-90.vercel.app/newslatter', user)
+        axios.post('https://b8a11-server-side-0rakib0.vercel.app/newslatter', user)
             .then(res => {
                 if (res.data.insertedId) {
                     Swal.fire(
@@ -201,7 +201,7 @@ const Home = () => {
             </div>
             <div className="bg-sky-100 text-center mx-auto py-6 rounded-lg pb-12">
                 <h4 className="text-4xl font-bold my-2">Subscirve To Our News Latter</h4>
-                <p className="mb-4">subscribe our Pachange and get a valuable discount</p>
+                <p className="mb-4">subscribe our Packange and get a valuable discount</p>
                 <form onSubmit={handleNewsLatter}>
                     <input type="email" placeholder="Enter Email" className="border-2 w-3/5 border-sky-400 p-2 h-12 rounded-l-lg z-10 " name="email" required />
                     <button className="bg-sky-400 h-12 px-4 rounded-r-lg text-white">Subscribe</button>

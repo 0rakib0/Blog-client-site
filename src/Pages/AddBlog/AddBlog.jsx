@@ -10,7 +10,7 @@ const AddBlog = () => {
     const [category, setCategory] = useState([])
     const CurrentTime = new Date()
     useEffect(() => {
-        fetch('https://blog-zeta-seven-90.vercel.app/allcategorys')
+        fetch('https://b8a11-server-side-0rakib0.vercel.app/allcategorys')
             .then(res => res.json())
             .then(data => setCategory(data))
     }, [])
@@ -53,7 +53,7 @@ const AddBlog = () => {
         }
 
         console.log(Blog)
-        axios.post('https://blog-zeta-seven-90.vercel.app/add-blog', Blog)
+        axios.post('https://b8a11-server-side-0rakib0.vercel.app/add-blog', Blog)
             .then(response => {
                 // Handle the success response here
                 if (response.data.insertedId) {

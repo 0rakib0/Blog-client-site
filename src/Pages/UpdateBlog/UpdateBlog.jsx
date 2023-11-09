@@ -11,7 +11,7 @@ const UpdateBlog = () => {
     const [category, setCategory] = useState([])
     console.log(category)
     useEffect(() => {
-        fetch('https://blog-zeta-seven-90.vercel.app/allcategorys')
+        fetch('https://b8a11-server-side-0rakib0.vercel.app/allcategorys')
             .then(res => res.json())
             .then(data => setCategory(data))
     }, [])
@@ -45,7 +45,7 @@ const UpdateBlog = () => {
         }
 
         console.log(Blog)
-        axios.put(`https://blog-zeta-seven-90.vercel.app/updateBlog/${Blog._id}`, UpdateBlog)
+        axios.put(`https://b8a11-server-side-0rakib0.vercel.app/updateBlog/${Blog._id}`, UpdateBlog)
             .then(response => {
                 // Handle the success response here
                 if (response.data.modifiedCount > 0) {
@@ -84,7 +84,7 @@ const UpdateBlog = () => {
                         <input type="text" defaultValue={Blog.blogPpic} className="border-2 border-sky-100 p-2 h-12 rounded-lg" name="blogPic" required />
                     </div>
                     <div className="md:flex gap-4">
-                        <select name="Category" defaultValue={Blog.Category} className="border-2 border-sky-100 p-2 h-12 rounded-lg mt-4 w-full md:w-1/2" id="">
+                        <select name="Category" value={Blog.Category} className="border-2 border-sky-100 p-2 h-12 rounded-lg mt-4 w-full md:w-1/2" id="">
                             <option value="comming">Select Category</option>
                             {
                                 category.map(cat => <option key={cat._id} value={cat.name}>{cat.name}</option>)

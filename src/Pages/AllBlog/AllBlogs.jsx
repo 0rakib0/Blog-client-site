@@ -26,16 +26,16 @@ const AllBlogs = () => {
     }
 
     useEffect(() => {
-        fetch('https://blog-zeta-seven-90.vercel.app/allcategorys')
+        fetch('https://b8a11-server-side-0rakib0.vercel.app/allcategorys')
             .then(res => res.json())
             .then(data => setCategorys(data))
     }, [])
 
     useEffect(() => {
-        axios.get(`https://blog-zeta-seven-90.vercel.app/all-blog?category=${selectCategory}&title=${selectTitle}`)
+        axios.get(`https://b8a11-server-side-0rakib0.vercel.app/all-blog?category=${selectCategory}&title=${selectTitle}`)
             .then(data => setBlogs(data.data))
 
-        // fetch('https://blog-zeta-seven-90.vercel.app/all-blog')
+        // fetch('https://b8a11-server-side-0rakib0.vercel.app/all-blog')
         // .then(res => res.json())
         // .then(data => setBlogs(data))
     }, [selectCategory, selectTitle])
@@ -44,6 +44,7 @@ const AllBlogs = () => {
     return (
         <div className="w-11/12 mx-auto">
             <div className="m-4 lg:flex justify-between">
+                
                 <div className="mb-2">
                     <form onSubmit={handleTitle}>
                         <input type="text" className="h-12 border-2 border-sky-400 lg:w-[500px] rounded-l-lg p-2" placeholder="Serch" name="serch" />
@@ -62,7 +63,7 @@ const AllBlogs = () => {
             <div className="grid lg:grid-cols-5 items-start">
                 <div className="col-span-3">
 
-                    {
+                    { !blogs ? <h1>No Data Sount</h1>:
                         blogs.map(blog => <RecentBlog key={blog._id} blog={blog}></RecentBlog>)
                     }
 

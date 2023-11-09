@@ -14,7 +14,7 @@ const BlogDetails = () => {
 
 
     useEffect(() => {
-        fetch(`https://blog-zeta-seven-90.vercel.app/comment/${Blog._id}`)
+        fetch(`https://b8a11-server-side-0rakib0.vercel.app/comment/${Blog._id}`)
             .then(res => res.json())
             .then(data => setCommet(data))
     }, [])
@@ -29,7 +29,7 @@ const BlogDetails = () => {
             userProfile: user?.photoURL,
             blogId: Blog._id
         }
-        axios.post('https://blog-zeta-seven-90.vercel.app/comment', Comment)
+        axios.post('https://b8a11-server-side-0rakib0.vercel.app/comment', Comment)
             .then(res => {
                 if (res.data.insertedId) {
                     Swal.fire(

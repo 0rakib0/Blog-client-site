@@ -29,7 +29,7 @@ const Register = () => {
             setError('Password should be atllist 6 character!')
             return
         }
-        if(!numericPattern.test(password)){
+        if (!numericPattern.test(password)) {
             setError('In Password Must be a Numeric number')
             return
         }
@@ -55,13 +55,14 @@ const Register = () => {
                     'Your Account Successfully created! Please Login',
                     'success'
                 )
-                
+                Logout()
+                naviget('/login')
+
             })
             .catch(error => {
                 setError(error.message)
             })
-            Logout()
-            naviget('/login')
+
     }
     return (
         <div className="bg-sky-100 w-11/12 mx-auto mt-6 p-6 rounded-lg">
