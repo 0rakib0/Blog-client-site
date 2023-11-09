@@ -5,4 +5,10 @@
 ## Some Future of this site
 + User Can Add blog
 + can see recent blog
-+ Creat acount
++ Creat acount with firebase 
++ User Can List his favowrit blog
++ Filter Blog by Category
++ User Can Search a blog by blog title
++ After create account user can post blog
++ blog owner can not comment on his own blog
++ Blog owner can edit vlog
