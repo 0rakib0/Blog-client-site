@@ -12,3 +12,7 @@
 + After create account user can post blog
 + blog owner can not comment on his own blog
 + Blog owner can edit vlog
+
+## Uses tecknology
+
+in this project I use ract, html, tainwind, diasyUI and otherse react animation for frontend and node, express and mongodb for backend and manage data
